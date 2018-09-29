@@ -1,26 +1,17 @@
-import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import React, {Component} from 'react'
+import {Router, Stack, Scene} from 'react-native-router-flux'
+import Home from './src/Screens/Home'
+import Details from './src/Screens/Details'
 
 export default class App extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-      </View>
-    );
+      <Router>
+        <Stack key="root">
+          <Scene key="home" component={Home} title="The Startup Fest" />
+          <Scene key="details" component={Details} title="StartUp Info" back />
+        </Stack>
+      </Router>
+    )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-});
