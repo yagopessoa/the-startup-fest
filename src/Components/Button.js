@@ -14,7 +14,7 @@ const Button = ({ buttonTitle, iconTitle, onPress }) => {
         <View style={buttonContainerStyle}>
             <TouchableOpacity onPress={onPress} style={buttonStyle}>
                 <View style={{flexDirection: 'row'}}>
-                    {hasIcon && <View style={{marginRight: 8}}>
+                    {hasIcon && <View style={{marginRight: 16}}>
                         <Icon name={iconTitle} color='#fff'/>
                     </View>}
                     <Text style={textStyle}>{buttonTitle}</Text>
