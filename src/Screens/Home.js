@@ -12,7 +12,7 @@ export default class Home extends Component {
     render(){
         return(
             <View style={styles.container}>
-                <Text style={styles.text}>Hello World!</Text>
+                <Text style={styles.text}>{this.props.msg}</Text>
                 <Button onPress={this.handleOpenStartup.bind(this)} buttonTitle={'CLICK ME'} />
             </View>
         )
