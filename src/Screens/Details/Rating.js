@@ -32,6 +32,10 @@ export default class Rating extends Component {
         )
     }
 
+    handleGrade = () => {
+        this.props.action(this.state.grade)
+    }
+
     componentDidMount() {
         try {
             if(this.props.grade) this.setState({ grade: this.props.grade })
@@ -45,19 +49,33 @@ export default class Rating extends Component {
 
         return(
             <View style={container} >
-                {this.renderStar()}                
-                { (grade >= 2) ?
-                    this.renderStar() :
-                    this.renderStarBorder() }
-                { (grade >= 3) ?
-                    this.renderStar() :
-                    this.renderStarBorder() }
-                { (grade >= 4) ?
-                    this.renderStar() :
-                    this.renderStarBorder() }
-                { (grade >= 5) ?
-                    this.renderStar() :
-                    this.renderStarBorder() }
+                <TouchableOpacity onPress={() => { this.setState({ grade: 1 }, this.handleGrade) }} >
+                    {this.renderStar()}
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={() => { this.setState({ grade: 2 }, this.handleGrade) }} >
+                    { (grade >= 2) ?
+                        this.renderStar() :
+                        this.renderStarBorder() }
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={() => { this.setState({ grade: 3 }, this.handleGrade) }} >
+                    { (grade >= 3) ?
+                        this.renderStar() :
+                        this.renderStarBorder() }
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={() => { this.setState({ grade: 4 }, this.handleGrade) }} >
+                    { (grade >= 4) ?
+                        this.renderStar() :
+                        this.renderStarBorder() }
+                </TouchableOpacity>
+
+                <TouchableOpacity /* onPress={this.handleGrade} */ onPress={() => { this.setState({ grade: 5 }, this.handleGrade) }} >
+                    { (grade >= 5) ?
+                        this.renderStar() :
+                        this.renderStarBorder() }
+                </TouchableOpacity>
             </View>
         )
     }
@@ -71,6 +89,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     starContainer: {
-        marginHorizontal: 4,
+        marginHorizontal: 8,
     }
 })

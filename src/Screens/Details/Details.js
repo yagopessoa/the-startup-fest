@@ -5,6 +5,29 @@ import Button from '../../Components/Button'
 import Rating from './Rating'
 
 export default class Details extends Component {
+
+    state = {
+        propostaGrade: 3,
+        apresentGrade: 3,
+        desenvolvGrade: 3,
+    }
+
+    proposta = (n) => {
+        this.setState({ propostaGrade: n})
+    }
+
+    apresent = (n) => {
+        this.setState({ apresentGrade: n})
+    }
+
+    desenvolv = (n) => {
+        this.setState({ desenvolvGrade: n})
+    }
+
+    handleSendGrades = () =>{
+        // enviar as notas para o firebase && redirecionar para pagina inicial
+    }
+
     render() {
 
         const { title, segment, description, imageUrl } = this.props
@@ -28,25 +51,26 @@ export default class Details extends Component {
                         <Text style={textTitle}>
                             Proposta
                         </Text>
-                        <Rating />
+                        <Rating action={this.proposta.bind(this)} />
+                        
                     </View>
 
                     <View style={ratingContainer}>
                         <Text style={textTitle}>
                             Apresentação/Pitch
                         </Text>
-                        <Rating />
+                        <Rating action={this.apresent.bind(this)} />
                     </View>
 
                     <View style={ratingContainer}>
                         <Text style={textTitle}>
                             Desenvolvimento
                         </Text>
-                        <Rating />
+                        <Rating action={this.desenvolv.bind(this)} />
                     </View>
 
                     <View style={{width: '100%'}}>
-                        <Button buttonTitle="ENVIAR AVALIAÇÃO" iconTitle="send" />
+                        <Button onPress={this.handleSendGrades.bind(this)} buttonTitle="ENVIAR AVALIAÇÃO" iconTitle="send" />
                     </View>
                 </View>
             </ScrollView>
