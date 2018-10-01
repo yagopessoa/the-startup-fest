@@ -17,41 +17,44 @@ export default class StartupCard extends Component {
 
     onPress = () => {
         
-        const { name, description, segment } = this.state
+        const { name, description, segment, imageUrl } = this.state
 
         Actions.details({ 
             title: name,
             description: description,
             segment: segment.name,
+            imageUrl: imageUrl,
         })
     }
 
     componentDidMount(){
         try{
-            const { name, description, Segment } = this.props.info
+            const { name, description, Segment, imageUrl } = this.props.info
 
             this.setState({
                 name: name,
                 description: description,
                 segment: {
                     name: Segment.name
-                }
+                },
+                imageUrl: imageUrl,
             })
         } catch(e) { this.setState({ name: String(e) }) }
     }
 
     render(){
-        const { name, segment } = this.state
+        const { name, segment, imageUrl } = this.state
         const { container, imgContainer, textContainer, textTitle, textSeg } = styles
 
         return(
             <View style={container}>
                 <TouchableOpacity onPress={this.onPress} >
                     <View style={imgContainer}>
-                        <Image 
-                            style={{width: 300, height: 300}}
-                            source={{uri: 'https://static.wixstatic.com/media/0adf28_eec83b33056243a9a33440a10b5d7afd.png'}}
-                        />
+                        {(imageUrl!=='') && <Image 
+                            style={{width: 250, height: 250}}
+                            defaultSource={require('../../img/loading.png')}
+                            source={{uri: imageUrl}}
+                        />}
                     </View>
                     <View style={textContainer}>
                         <Text style={textTitle}>{name}</Text>

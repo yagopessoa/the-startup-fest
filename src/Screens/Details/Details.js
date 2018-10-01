@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Platform, StyleSheet, Text, View, ScrollView} from 'react-native'
+import {Platform, StyleSheet, Text, View, ScrollView, Image} from 'react-native'
 
 import Button from '../../Components/Button'
 import Rating from './Rating'
@@ -7,13 +7,19 @@ import Rating from './Rating'
 export default class Details extends Component {
     render() {
 
-        const { title, segment, description } = this.props
+        const { title, segment, description, imageUrl } = this.props
         const { container, imgContainer, textContainer, textTitle, textSeg, textDescript, ratingContainer } = styles
 
         return (
             <ScrollView style={{flex: 1}} >
                 <View style={container} >
-                    <View style={imgContainer}></View>
+                    <View style={imgContainer}>
+                        <Image 
+                            style={{width: 300, height: 300}}
+                            defaultSource={require('../../img/loading.png')}
+                            source={{uri: imageUrl}}
+                        />
+                    </View>
                     <Text style={textTitle}>{title}</Text>
                     <Text style={textSeg}>{segment}</Text>
                     <Text style={textDescript}>{description}</Text>
