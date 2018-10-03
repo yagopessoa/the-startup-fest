@@ -30,14 +30,14 @@ export default class Details extends Component {
 
     handleSendGrades = () => {
         // enviar as notas para o firebase && redirecionar para pagina inicial
-        firebase.database().ref('startups/'+this.props.title).set(
+        firebase.database().ref('startups/'+this.props.title.split(".").join("")).set(
             {
                 rating: {
                     proposta: this.state.propostaGrade,
                     apresent: this.state.apresentGrade,
                     desenvolv: this.state.desenvolvGrade,
                 },
-                title: this.props.title,
+                title: this.props.title.split(".").join(""),
             }
         ).then(() => {
             Actions.replace('home')

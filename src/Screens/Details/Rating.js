@@ -24,14 +24,6 @@ export default class Rating extends Component {
         )
     }
 
-    renderStarHalf(){
-        return(
-            <View style={styles.starContainer}>
-                <Icon name="star-half" size={40} />
-            </View>
-        )
-    }
-
     handleGrade = () => {
         this.props.action(this.state.grade)
     }
