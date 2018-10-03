@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
 import {Platform, StyleSheet, Text, View, ScrollView, Image} from 'react-native'
+import { Actions } from 'react-native-router-flux'
+import firebase from 'react-native-firebase'
 
 import Button from '../../Components/Button'
 import Rating from './Rating'
@@ -7,9 +9,11 @@ import Rating from './Rating'
 export default class Details extends Component {
 
     state = {
+        isLoading: true,
         propostaGrade: 3,
         apresentGrade: 3,
         desenvolvGrade: 3,
+        msg: 'Loading...',
     }
 
     proposta = (n) => {
@@ -24,14 +28,58 @@ export default class Details extends Component {
         this.setState({ desenvolvGrade: n})
     }
 
-    handleSendGrades = () =>{
+    handleSendGrades = () => {
         // enviar as notas para o firebase && redirecionar para pagina inicial
+        firebase.database().ref('startups/'+this.props.title).set(
+            {
+                rating: {
+                    proposta: this.state.propostaGrade,
+                    apresent: this.state.apresentGrade,
+                    desenvolv: this.state.desenvolvGrade,
+                },
+                title: this.props.title,
+            }
+        ).then(() => {
+            Actions.replace('home')
+        }).catch((err) => {
+            Actions.replace('home')
+            console.log(err)
+        })
+
+        Actions.replace('home')
+    }
+
+    componentWillMount(){
+        /* const { title, segment, description, imageUrl } = this.props
+
+        firebase.database().ref('startups/AgroNow/title').on('value', (data) => {
+            this.setState({ msg: data })
+        })
+
+        const { title } = this.props
+
+        firebase.database().ref('startups/'+title).set(
+            {
+                title: title,
+                rating: {
+                    proposta: 0,
+                    apresent: 0,
+                    desenvolv: 0
+                }
+            }
+        ).then(() => {
+            this.setState({ isLoading: false })
+        }).catch((err) => {
+            console.log(err)
+            this.setState({ isLoading: false })
+        }) */
     }
 
     render() {
 
         const { title, segment, description, imageUrl } = this.props
         const { container, imgContainer, textContainer, textTitle, textSeg, textDescript, ratingContainer } = styles
+        const { isLoading } = this.state
 
         return (
             <ScrollView style={{flex: 1}} >
@@ -44,6 +92,9 @@ export default class Details extends Component {
                         />
                     </View>
                     <Text style={textTitle}>{title}</Text>
+                    
+                    {/* <Text>{this.state.msg}</Text> */}
+                    
                     <Text style={textSeg}>{segment}</Text>
                     <Text style={textDescript}>{description}</Text>
                     
