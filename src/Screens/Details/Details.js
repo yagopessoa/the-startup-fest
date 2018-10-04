@@ -1,14 +1,59 @@
 import React, {Component} from 'react'
-import {Platform, StyleSheet, Text, View, ScrollView, Image} from 'react-native'
+import {StyleSheet, Text, View, ScrollView, Image} from 'react-native'
+import { Actions } from 'react-native-router-flux'
+//import firebase from 'react-native-firebase'
 
 import Button from '../../Components/Button'
 import Rating from './Rating'
 
 export default class Details extends Component {
+
+    state = {
+        isLoading: true,
+        propostaGrade: 3,
+        apresentGrade: 3,
+        desenvolvGrade: 3,
+        msg: 'Loading...',
+    }
+
+    proposta = (n) => {
+        this.setState({ propostaGrade: n})
+    }
+
+    apresent = (n) => {
+        this.setState({ apresentGrade: n})
+    }
+
+    desenvolv = (n) => {
+        this.setState({ desenvolvGrade: n})
+    }
+
+    handleSendGrades = () => {
+        // enviar as notas para o firebase && redirecionar para pagina inicial
+        /* firebase.database().ref('startups/'+this.props.title.split(".").join("")).set(
+            {
+                rating: {
+                    proposta: this.state.propostaGrade,
+                    apresent: this.state.apresentGrade,
+                    desenvolv: this.state.desenvolvGrade,
+                },
+                title: this.props.title.split(".").join(""),
+            }
+        ).then(() => {
+            Actions.replace('home')
+        }).catch((err) => {
+            Actions.replace('home')
+            console.log(err)
+        }) */
+
+        Actions.replace('home')
+    }
+
     render() {
 
         const { title, segment, description, imageUrl } = this.props
         const { container, imgContainer, textContainer, textTitle, textSeg, textDescript, ratingContainer } = styles
+        const { isLoading } = this.state
 
         return (
             <ScrollView style={{flex: 1}} >
@@ -21,6 +66,7 @@ export default class Details extends Component {
                         />
                     </View>
                     <Text style={textTitle}>{title}</Text>
+                    
                     <Text style={textSeg}>{segment}</Text>
                     <Text style={textDescript}>{description}</Text>
                     
@@ -28,25 +74,26 @@ export default class Details extends Component {
                         <Text style={textTitle}>
                             Proposta
                         </Text>
-                        <Rating />
+                        <Rating action={this.proposta.bind(this)} />
+                        
                     </View>
 
                     <View style={ratingContainer}>
                         <Text style={textTitle}>
                             Apresentação/Pitch
                         </Text>
-                        <Rating />
+                        <Rating action={this.apresent.bind(this)} />
                     </View>
 
                     <View style={ratingContainer}>
                         <Text style={textTitle}>
                             Desenvolvimento
                         </Text>
-                        <Rating />
+                        <Rating action={this.desenvolv.bind(this)} />
                     </View>
 
                     <View style={{width: '100%'}}>
-                        <Button buttonTitle="ENVIAR AVALIAÇÃO" iconTitle="send" />
+                        <Button onPress={this.handleSendGrades.bind(this)} buttonTitle="ENVIAR AVALIAÇÃO" iconTitle="send" />
                     </View>
                 </View>
             </ScrollView>
@@ -77,7 +124,7 @@ const styles = StyleSheet.create({
     textTitle: {
         fontSize: 24,
         fontWeight: 'bold',
-        color: '#000',
+        color: '#212121',
     },
     textSeg: {
         marginVertical: 8,

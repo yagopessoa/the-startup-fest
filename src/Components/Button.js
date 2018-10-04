@@ -37,7 +37,7 @@ const styles = {
     },
     buttonStyle: {
         height: 56,
-        backgroundColor: '#3F51B5',
+        backgroundColor: '#673AB7',
         borderRadius: 5,
         padding: 16,
         margin: 16,
