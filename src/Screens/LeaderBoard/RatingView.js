@@ -4,9 +4,9 @@ import { Icon } from 'react-native-elements'
 
 export default RatingView = ({ score }) => {
 
-    let grade = score.split(",")[0]
+    let grade = score.split(".")[0]
 
-    if(score.split(",")[1] && parseInt(score.split(",")[1])>5) grade = parseInt(grade)+1
+    if(score.split(".")[1] && parseInt(score.split(".")[1])>5) grade = parseInt(grade)+1
 
     return(
         <View style={styles.container} >

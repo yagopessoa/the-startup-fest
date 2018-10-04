@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
-import {Platform, StyleSheet, Text, View, ScrollView, Image} from 'react-native'
+import {StyleSheet, Text, View, ScrollView, Image} from 'react-native'
 import { Actions } from 'react-native-router-flux'
-import firebase from 'react-native-firebase'
+//import firebase from 'react-native-firebase'
 
 import Button from '../../Components/Button'
 import Rating from './Rating'
@@ -30,7 +30,7 @@ export default class Details extends Component {
 
     handleSendGrades = () => {
         // enviar as notas para o firebase && redirecionar para pagina inicial
-        firebase.database().ref('startups/'+this.props.title.split(".").join("")).set(
+        /* firebase.database().ref('startups/'+this.props.title.split(".").join("")).set(
             {
                 rating: {
                     proposta: this.state.propostaGrade,
@@ -44,35 +44,9 @@ export default class Details extends Component {
         }).catch((err) => {
             Actions.replace('home')
             console.log(err)
-        })
+        }) */
 
         Actions.replace('home')
-    }
-
-    componentWillMount(){
-        /* const { title, segment, description, imageUrl } = this.props
-
-        firebase.database().ref('startups/AgroNow/title').on('value', (data) => {
-            this.setState({ msg: data })
-        })
-
-        const { title } = this.props
-
-        firebase.database().ref('startups/'+title).set(
-            {
-                title: title,
-                rating: {
-                    proposta: 0,
-                    apresent: 0,
-                    desenvolv: 0
-                }
-            }
-        ).then(() => {
-            this.setState({ isLoading: false })
-        }).catch((err) => {
-            console.log(err)
-            this.setState({ isLoading: false })
-        }) */
     }
 
     render() {
@@ -92,8 +66,6 @@ export default class Details extends Component {
                         />
                     </View>
                     <Text style={textTitle}>{title}</Text>
-                    
-                    {/* <Text>{this.state.msg}</Text> */}
                     
                     <Text style={textSeg}>{segment}</Text>
                     <Text style={textDescript}>{description}</Text>
@@ -152,7 +124,7 @@ const styles = StyleSheet.create({
     textTitle: {
         fontSize: 24,
         fontWeight: 'bold',
-        color: '#000',
+        color: '#212121',
     },
     textSeg: {
         marginVertical: 8,

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { StyleSheet, TouchableOpacity, View } from 'react-native'
 import { Icon } from 'react-native-elements'
 
 export default class Rating extends Component {
@@ -11,7 +11,7 @@ export default class Rating extends Component {
     renderStar(){
         return(
             <View style={styles.starContainer}>
-                <Icon name="star" size={40} />
+                <Icon name="star" color="#212121" size={40} />
             </View>
         )
     }
@@ -19,7 +19,7 @@ export default class Rating extends Component {
     renderStarBorder(){
         return(
             <View style={styles.starContainer}>
-                <Icon name="star-border" size={40} />
+                <Icon name="star-border" color="#212121" size={40} />
             </View>
         )
     }
@@ -63,7 +63,7 @@ export default class Rating extends Component {
                         this.renderStarBorder() }
                 </TouchableOpacity>
 
-                <TouchableOpacity /* onPress={this.handleGrade} */ onPress={() => { this.setState({ grade: 5 }, this.handleGrade) }} >
+                <TouchableOpacity onPress={() => { this.setState({ grade: 5 }, this.handleGrade) }} >
                     { (grade >= 5) ?
                         this.renderStar() :
                         this.renderStarBorder() }

@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native'
+import {Text, View, TouchableOpacity, Image} from 'react-native'
 import { Actions } from 'react-native-router-flux'
 
 export default class StartupCard extends Component {
@@ -93,6 +93,7 @@ const styles = {
     },
     textTitle: {
         marginBottom: 8,
+        color: '#212121',
         fontSize: 20,
         fontWeight: 'bold',
     },

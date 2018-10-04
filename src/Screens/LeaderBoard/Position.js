@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native'
+import {StyleSheet, Text, View, Image} from 'react-native'
 import RatingView from './RatingView'
 
 export default Position = ({ name, segment, imgUrl, position, score }) => {
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     textTitle: {
         fontSize: 20,
         fontWeight: 'bold',
-        color: '#000',
+        color: '#212121',
     },
     textSegment: {
         fontSize: 16,

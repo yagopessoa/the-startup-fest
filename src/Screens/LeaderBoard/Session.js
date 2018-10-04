@@ -1,26 +1,38 @@
 import React, {Component} from 'react'
-import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native'
+import {StyleSheet, Text, View} from 'react-native'
 
 import Position from './Position'
+import StartupList from '../../StartupList'
 
 export default class Session extends Component {
+    state = {
+        grades: [],
+        startups: []
+    }
+
+    componentWillMount(){
+        // getting random grades instead of reading from firebase
+        var grades = []
+        grades.push(Math.random()*4 + Math.random())
+        grades.push(Math.random()*4 + Math.random())
+        grades.push(Math.random()*4 + Math.random())
+        grades.sort((a, b) => {return b-a})
+        this.setState({grades: grades, startups: StartupList.data.allStartups})
+    }
     
     render(){
         const { session } = this.props
         const { container, textTitle } = styles
-
-        const name = "Startup"
-        const segment = "Top"
-        const imgUrl = "https://thumb.lovemondays.com.br/image/40fa4baba2854c2fa7399bbb90debcc1/logos/4a835e/techfit.png"
+        const { grades, startups } = this.state
         
         return(
             <View style={container} >
                 <Text style={textTitle} >
                     {session}
                 </Text>
-                <Position name={name} segment={segment} imgUrl={imgUrl} position="1º" score="4,8/5" />
-                <Position name={name} segment={segment} imgUrl={imgUrl} position="2º" score="4,2/5" />
-                <Position name={name} segment={segment} imgUrl={imgUrl} position="3º" score="3,5/5" />
+                <Position name={startups[0].name} segment={startups[0].Segment.name} imgUrl={startups[0].imageUrl} position="1º" score={String(grades[0].toFixed(1))+"/5"} />
+                <Position name={startups[1].name} segment={startups[1].Segment.name} imgUrl={startups[1].imageUrl} position="2º" score={String(grades[1].toFixed(1))+"/5"} />
+                <Position name={startups[2].name} segment={startups[2].Segment.name} imgUrl={startups[2].imageUrl} position="3º" score={String(grades[2].toFixed(1))+"/5"} />
             </View>
         )
     }
@@ -35,7 +47,7 @@ const styles = StyleSheet.create({
     textTitle: {
         fontSize: 24,
         fontWeight: 'bold',
-        color: '#000',
+        color: '#212121',
         marginBottom: 8,
     },
 })
