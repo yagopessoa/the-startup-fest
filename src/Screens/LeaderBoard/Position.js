@@ -4,7 +4,7 @@ import RatingView from './RatingView'
 
 export default Position = ({ name, segment, imgUrl, position, score }) => {
 
-    const { container, textContainer, starsContainer, textTitle, textSegment } = styles
+    const { container, textContainer, starsContainer, textTitle, textGrade, textSegment } = styles
 
     return(
         <View style={container} >
@@ -19,7 +19,7 @@ export default Position = ({ name, segment, imgUrl, position, score }) => {
                 <Text style={textSegment} >{segment}</Text>
                 <View style={starsContainer} >
                     <RatingView score={score} />
-                    <Text style={textTitle} >{score}</Text>
+                    <Text style={textGrade} >{score}</Text>
                 </View>
             </View>
         </View>
@@ -54,6 +54,11 @@ const styles = StyleSheet.create({
     },
     textTitle: {
         fontSize: 20,
+        fontWeight: 'bold',
+        color: '#212121',
+    },
+    textGrade: {
+        fontSize: 16,
         fontWeight: 'bold',
         color: '#212121',
     },
