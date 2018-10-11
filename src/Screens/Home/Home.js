@@ -44,8 +44,8 @@ export default class Home extends Component {
         .catch(e => this.setState({
             msg: String(e),
             isLoading: false,
-            //hasError: true,
-            itens: StartupList.data.allStartups,    // <== Using static data in case of no connection
+            hasError: true,
+            //itens: StartupList.data.allStartups,    // <== Using static data in case of no connection
         }))
     }
 

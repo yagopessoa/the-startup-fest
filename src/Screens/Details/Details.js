@@ -2,35 +2,50 @@ import React, {Component} from 'react'
 import {StyleSheet, Text, View, ScrollView, Image} from 'react-native'
 import { Actions } from 'react-native-router-flux'
 //import firebase from 'react-native-firebase'
+import firebase from 'firebase'
 
 import Button from '../../Components/Button'
 import Rating from './Rating'
+
+//const database = firebase.database()
+
+const config = {
+    apiKey: "AIzaSyAVu8hIbG4Z8U641F7BMK-7fECk4qSNp_A",
+    authDomain: "thestartupfest-43364.firebaseapp.com",
+    databaseURL: "https://thestartupfest-43364.firebaseio.com",
+    projectId: "thestartupfest-43364",
+    storageBucket: "thestartupfest-43364.appspot.com",
+    messagingSenderId: "726675505779"
+}
+const firebaseApp = firebase.initializeApp(config)
+var database = firebaseApp.database()
 
 export default class Details extends Component {
 
     state = {
         isLoading: true,
-        propostaGrade: 3,
-        apresentGrade: 3,
-        desenvolvGrade: 3,
         msg: 'Loading...',
+        hasError: false,
+        newProposta: 3, 
+        newApresent: 3, 
+        newDesenvolv: 3,
     }
 
     proposta = (n) => {
-        this.setState({ propostaGrade: n})
+        this.setState({ newProposta: n})
     }
 
     apresent = (n) => {
-        this.setState({ apresentGrade: n})
+        this.setState({ newApresent: n})
     }
 
     desenvolv = (n) => {
-        this.setState({ desenvolvGrade: n})
+        this.setState({ newDesenvolv: n})
     }
 
-    handleSendGrades = () => {
+    /* handleSendGradesAAAHH = () => {
         // enviar as notas para o firebase && redirecionar para pagina inicial
-        /* firebase.database().ref('startups/'+this.props.title.split(".").join("")).set(
+        firebase.database().ref('startups/'+this.props.title.split(".").join("")).set(
             {
                 rating: {
                     proposta: this.state.propostaGrade,
@@ -44,9 +59,63 @@ export default class Details extends Component {
         }).catch((err) => {
             Actions.replace('home')
             console.log(err)
-        }) */
+        })
 
         Actions.replace('home')
+    } */
+
+    handleSendGrades = () => {
+        const { newProposta, newApresent, newDesenvolv } = this.state
+        const startupName = this.props.title
+
+        try{
+            database.ref('startups/'+startupName).once('value', (snapshot) => {
+                //console.log('Snapshot ==> ', snapshot.val())
+
+                if(snapshot.val()===null){
+
+                    database.ref('startups/'+startupName).set({
+                        rating: {
+                            proposta: newProposta,
+                            apresent: newApresent,
+                            desenvolv: newDesenvolv,
+                        },
+                        qtd: 1,
+                    }).then(() => {
+                        console.log("Dados salvos com sucesso!")
+                        Actions.replace('home')
+                    }).catch(err => {
+                        console.log('ERRO... ',err)
+                        this.setState({hasError: true, msg: String(err)})
+                    })
+
+                } else {
+
+                    const proposta = snapshot.val().rating.proposta
+                    const apresent = snapshot.val().rating.apresent
+                    const desenvolv = snapshot.val().rating.desenvolv
+                    const qtd = snapshot.val().qtd + 1
+
+                    database.ref('startups/'+startupName).set({
+                        rating: {
+                            proposta: ((proposta*(qtd-1))+newProposta)/qtd,
+                            apresent: ((apresent*(qtd-1))+newApresent)/qtd,
+                            desenvolv: ((desenvolv*(qtd-1))+newDesenvolv)/qtd,
+                        },
+                        qtd: qtd,
+                    }).then(() => {
+                        Actions.replace('home')
+                        console.log("Dados salvos com sucesso!")
+                    }).catch(err => {
+                        console.log('ERRO... ',err)
+                        this.setState({hasError: true, msg: String(err)})
+                    })
+                }
+
+            }, (err) => {
+                this.setState({hasError: true, msg: String(err)})
+            })
+        } catch(e) { this.setState({hasError: true, msg: String(e)}) }
     }
 
     render() {
@@ -54,6 +123,8 @@ export default class Details extends Component {
         const { title, segment, description, imageUrl } = this.props
         const { container, imgContainer, textContainer, textTitle, textSeg, textDescript, ratingContainer } = styles
         const { isLoading } = this.state
+
+        if(this.state.hasError) return <Text>{this.state.msg}</Text>
 
         return (
             <ScrollView style={{flex: 1}} >
