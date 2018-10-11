@@ -1,13 +1,10 @@
 import React, {Component} from 'react'
 import {StyleSheet, Text, View, ScrollView, Image} from 'react-native'
 import { Actions } from 'react-native-router-flux'
-//import firebase from 'react-native-firebase'
 import firebase from 'firebase'
 
 import Button from '../../Components/Button'
 import Rating from './Rating'
-
-//const database = firebase.database()
 
 const config = {
     apiKey: "AIzaSyAVu8hIbG4Z8U641F7BMK-7fECk4qSNp_A",
@@ -43,34 +40,12 @@ export default class Details extends Component {
         this.setState({ newDesenvolv: n})
     }
 
-    /* handleSendGradesAAAHH = () => {
-        // enviar as notas para o firebase && redirecionar para pagina inicial
-        firebase.database().ref('startups/'+this.props.title.split(".").join("")).set(
-            {
-                rating: {
-                    proposta: this.state.propostaGrade,
-                    apresent: this.state.apresentGrade,
-                    desenvolv: this.state.desenvolvGrade,
-                },
-                title: this.props.title.split(".").join(""),
-            }
-        ).then(() => {
-            Actions.replace('home')
-        }).catch((err) => {
-            Actions.replace('home')
-            console.log(err)
-        })
-
-        Actions.replace('home')
-    } */
-
     handleSendGrades = () => {
         const { newProposta, newApresent, newDesenvolv } = this.state
-        const startupName = this.props.title
+        const startupName = this.props.title.split(".").join("")
 
         try{
             database.ref('startups/'+startupName).once('value', (snapshot) => {
-                //console.log('Snapshot ==> ', snapshot.val())
 
                 if(snapshot.val()===null){
 
