@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
-import {StyleSheet, Text, View, ScrollView, Image} from 'react-native'
+import {StyleSheet, Text, View, ScrollView, Image, Alert} from 'react-native'
 import { Actions } from 'react-native-router-flux'
+import { Divider } from 'react-native-elements'
 
 import Button from '../../Components/Button'
 import Rating from './Rating'
@@ -17,6 +18,7 @@ export default class Details extends Component {
         newProposta: 0, 
         newApresent: 0, 
         newDesenvolv: 0,
+        disabled: false,
     }
 
     proposta = (n) => {
@@ -32,6 +34,8 @@ export default class Details extends Component {
     }
 
     handleSendGrades = () => {
+        this.setState({ disabled: true })
+
         const { newProposta, newApresent, newDesenvolv } = this.state
         const startupName = this.props.title.split(".").join("")
 
@@ -49,10 +53,30 @@ export default class Details extends Component {
                         qtd: 1,
                     }).then(() => {
                         console.log("Dados salvos com sucesso!")
-                        Actions.replace('home')
+
+                        Alert.alert(
+                            'Sucesso',
+                            'Votos enviados com sucesso!',
+                            [
+                                {text: 'OK', onPress: () => {
+                                    Actions.replace('home')
+                                }},
+                            ],
+                            { cancelable: false }
+                        )
                     }).catch(err => {
                         console.log('ERRO... ',err)
-                        this.setState({hasError: true, msg: String(err)})
+                        //this.setState({hasError: true, msg: String(err)})
+                        Alert.alert(
+                            'Ops!',
+                            'Infelizmente seus votos não puderam ser enviados...',
+                            [
+                                {text: 'OK', onPress: () => {
+                                    this.setState({ disabled: false })
+                                }},
+                            ],
+                            { cancelable: false }
+                        )
                     })
 
                 } else {
@@ -70,11 +94,31 @@ export default class Details extends Component {
                         },
                         qtd: qtd,
                     }).then(() => {
-                        Actions.replace('home')
                         console.log("Dados salvos com sucesso!")
+                        
+                        Alert.alert(
+                            'Sucesso',
+                            'Votos enviados com sucesso!',
+                            [
+                                {text: 'OK', onPress: () => {
+                                    Actions.replace('home')
+                                }},
+                            ],
+                            { cancelable: false }
+                        )
                     }).catch(err => {
                         console.log('ERRO... ',err)
-                        this.setState({hasError: true, msg: String(err)})
+                        //this.setState({hasError: true, msg: String(err)})
+                        Alert.alert(
+                            'Ops!',
+                            'Infelizmente seus votos não puderam ser enviados...',
+                            [
+                                {text: 'OK', onPress: () => {
+                                    this.setState({ disabled: false })
+                                }},
+                            ],
+                            { cancelable: false }
+                        )
                     })
                 }
 
@@ -87,8 +131,8 @@ export default class Details extends Component {
     render() {
 
         const { title, segment, description, imageUrl } = this.props
-        const { container, imgContainer, textContainer, textTitle, textSeg, textDescript, ratingContainer } = styles
-        const { isLoading, newProposta, newApresent, newDesenvolv } = this.state
+        const { container, imgContainer, textContainer, textTitle, textSeg, textDescript, ratingContainer, dividerStyle } = styles
+        const { isLoading, newProposta, newApresent, newDesenvolv, disabled } = this.state
 
         if(this.state.hasError) return <Text>{this.state.msg}</Text>
 
@@ -114,24 +158,24 @@ export default class Details extends Component {
                         <Rating action={this.proposta.bind(this)} />
                         
                     </View>
-
+                    <Divider style={dividerStyle} />
                     <View style={ratingContainer}>
                         <Text style={textTitle}>
                             Apresentação/Pitch
                         </Text>
                         <Rating action={this.apresent.bind(this)} />
                     </View>
-
+                    <Divider style={dividerStyle} />
                     <View style={ratingContainer}>
                         <Text style={textTitle}>
                             Desenvolvimento
                         </Text>
                         <Rating action={this.desenvolv.bind(this)} />
                     </View>
-
+                    
                     <View style={{width: '100%'}}>
                         <Button 
-                            disabled={(newApresent<1)||(newDesenvolv<1)||(newProposta<1)}
+                            disabled={(newApresent<1)||(newDesenvolv<1)||(newProposta<1)||disabled}
                             onPress={this.handleSendGrades.bind(this)}
                             buttonTitle="ENVIAR AVALIAÇÃO"
                             iconTitle="send"
@@ -179,5 +223,9 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontStyle: 'italic',
         backgroundColor: '#fff',
+    },
+    dividerStyle: {
+        width: '90%',
+        backgroundColor: '#bdbdbd'
     },
 })

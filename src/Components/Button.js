@@ -15,7 +15,7 @@ const Button = ({ buttonTitle, iconTitle, onPress, disabled }) => {
             <TouchableOpacity disabled={disabled} onPress={onPress} style={disabled ? buttonDisabledStyle : buttonStyle}>
                 <View style={{flexDirection: 'row'}}>
                     {hasIcon && <View style={{marginRight: 16}}>
-                        <Icon name={iconTitle} color={disabled ? '#000' : '#fff'}/>
+                        <Icon name={iconTitle} color={disabled ? '#212121' : '#fff'}/>
                     </View>}
                     <Text style={disabled ? textDisabledStyle : textStyle}>{buttonTitle}</Text>
                 </View>
@@ -36,7 +36,7 @@ const styles = {
         fontWeight: '600',
     },
     textDisabledStyle: {
-        color: '#000',
+        color: '#212121',
         fontSize: 16,
         fontWeight: '600',
     },
