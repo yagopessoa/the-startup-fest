@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import { ScrollView, View, ActivityIndicator } from 'react-native'
 import { Actions } from 'react-native-router-flux'
+import {Divider} from 'react-native-elements'
 
 import Session from './Session'
 
@@ -48,14 +49,18 @@ export default class LeaderBoard extends Component {
         const { isLoading, startups } = this.state
 
         return(
-            <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}} >
+            <View style={{flex: 1, width: '100%', alignItems: 'center', justifyContent: 'center'}} >
                 {isLoading ? <ActivityIndicator size="large" color="#512DA8" /> :
                 <ScrollView style={{flex: 1}} >
                     <Session startups={startups} session="Proposta" />
+                    <Divider style={this.dividerStyle} />
                     <Session startups={startups} session="Apresentação/Pitch" />
+                    <Divider style={this.dividerStyle} />
                     <Session startups={startups} session="Desenvolvimento" />
                 </ScrollView>}
             </View>
         )
     }
+
+    dividerStyle = {width: '100%', backgroundColor: '#bdbdbd'}
 }

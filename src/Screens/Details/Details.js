@@ -14,9 +14,9 @@ export default class Details extends Component {
         isLoading: true,
         msg: 'Loading...',
         hasError: false,
-        newProposta: 3, 
-        newApresent: 3, 
-        newDesenvolv: 3,
+        newProposta: 0, 
+        newApresent: 0, 
+        newDesenvolv: 0,
     }
 
     proposta = (n) => {
@@ -88,7 +88,7 @@ export default class Details extends Component {
 
         const { title, segment, description, imageUrl } = this.props
         const { container, imgContainer, textContainer, textTitle, textSeg, textDescript, ratingContainer } = styles
-        const { isLoading } = this.state
+        const { isLoading, newProposta, newApresent, newDesenvolv } = this.state
 
         if(this.state.hasError) return <Text>{this.state.msg}</Text>
 
@@ -130,7 +130,12 @@ export default class Details extends Component {
                     </View>
 
                     <View style={{width: '100%'}}>
-                        <Button onPress={this.handleSendGrades.bind(this)} buttonTitle="ENVIAR AVALIAÇÃO" iconTitle="send" />
+                        <Button 
+                            disabled={(newApresent<1)||(newDesenvolv<1)||(newProposta<1)}
+                            onPress={this.handleSendGrades.bind(this)}
+                            buttonTitle="ENVIAR AVALIAÇÃO"
+                            iconTitle="send"
+                        />
                     </View>
                 </View>
             </ScrollView>
