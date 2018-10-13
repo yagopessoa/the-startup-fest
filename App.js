@@ -8,6 +8,7 @@ import Details from './src/Screens/Details/Details'
 import LeaderBoard from './src/Screens/LeaderBoard/LeaderBoard'
 
 export default class App extends Component {
+
   render() {
     return (
       <Router>

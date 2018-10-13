@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import {StyleSheet, Text, View, ScrollView, ActivityIndicator} from 'react-native'
 
 import StartupCard from './StartupCard'
-import StartupList from '../../StartupList'
 
 import ApolloClient from "apollo-boost"
 import gql from "graphql-tag"
@@ -45,7 +44,7 @@ export default class Home extends Component {
             msg: String(e),
             isLoading: false,
             hasError: true,
-            //itens: StartupList.data.allStartups,    // <== Using static data in case of no connection
+            // TODO: show no connection icon
         }))
     }
 

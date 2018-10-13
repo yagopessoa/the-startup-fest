@@ -1,24 +1,15 @@
 import React, {Component} from 'react'
 import {StyleSheet, Text, View, ScrollView, Image} from 'react-native'
 import { Actions } from 'react-native-router-flux'
-import firebase from 'firebase'
 
 import Button from '../../Components/Button'
 import Rating from './Rating'
 
-const config = {
-    apiKey: "AIzaSyAVu8hIbG4Z8U641F7BMK-7fECk4qSNp_A",
-    authDomain: "thestartupfest-43364.firebaseapp.com",
-    databaseURL: "https://thestartupfest-43364.firebaseio.com",
-    projectId: "thestartupfest-43364",
-    storageBucket: "thestartupfest-43364.appspot.com",
-    messagingSenderId: "726675505779"
-}
-const firebaseApp = firebase.initializeApp(config)
+import firebaseApp from '../../database/firebase'
+
 var database = firebaseApp.database()
 
 export default class Details extends Component {
-
     state = {
         isLoading: true,
         msg: 'Loading...',
