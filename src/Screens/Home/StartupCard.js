@@ -18,6 +18,10 @@ export default class StartupCard extends Component {
     onPress = () => {
         
         const { name, description, segment, imageUrl } = this.state
+        const title = name
+        const segmen = segment.name
+
+        //this.props.openDetails(title, description, segmen, imageUrl)
 
         Actions.details({ 
             title: name,

@@ -1,8 +1,10 @@
 import React, {Component} from 'react'
 import {StyleSheet, Text, View, ScrollView, ActivityIndicator} from 'react-native'
+import {Router, Stack, Scene} from 'react-native-router-flux'
 
 import Header from '../../Components/Header'
 import StartupCard from './StartupCard'
+import Details from '../Details/Details'
 
 import ApolloClient from "apollo-boost"
 import gql from "graphql-tag"
@@ -11,12 +13,14 @@ const client = new ApolloClient({
   uri: "https://startups-project-mytvsxrgeb.now.sh"
 })
 
-export default class Home extends Component {
+class Voting extends Component {
     state = {
         msg: 'Loading...',
         itens: [],
         isLoading: true,
         hasError: false,
+        details: false,
+        info: null,
     }
     
     componentDidMount(){
@@ -54,6 +58,7 @@ export default class Home extends Component {
             <StartupCard
                 key={startup.name}
                 info={startup}
+                openDetails={this.openDetails}
             />
         )
     }
@@ -75,6 +80,25 @@ export default class Home extends Component {
                     }
                 </View>
             </View>
+        )
+    }
+}
+
+export default class Home extends Component {
+    render(){
+        return(
+            <Router>
+                <Stack key="root">
+                    <Scene key="home" component={Voting} hideNavBar />
+                    <Scene 
+                        key="details"
+                        component={Details} 
+                        navigationBarStyle={{backgroundColor: '#673AB7'}}
+                        navBarButtonColor="#fff"
+                        back
+                    />
+                </Stack>
+            </Router>
         )
     }
 }
