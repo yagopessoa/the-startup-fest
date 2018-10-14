@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {StyleSheet, Text, View, ScrollView, ActivityIndicator} from 'react-native'
 
+import Header from '../../Components/Header'
 import StartupCard from './StartupCard'
 
 import ApolloClient from "apollo-boost"
@@ -59,18 +60,21 @@ export default class Home extends Component {
 
     render(){
         return(
-            <ScrollView style={styles.container}>
-                {this.state.isLoading ? 
-                    <View style={{flex: 1, alignItems: 'center', marginTop: 256}}>
-                        <ActivityIndicator size="large" color="#512DA8" />
-                    </View> : 
-                    <View style={{flex: 1, alignItems: 'center'}}>
-                        {this.state.hasError ? <Text style={{ marginTop: 256 }} >{this.state.msg}</Text> :
-                            this.renderList()
-                        }
-                    </View>
-                }
-            </ScrollView>
+            <View style={styles.container}>
+                <Header title="The Startup Fest" />
+                <View style={{flex: 1}} > 
+                    {this.state.isLoading ? 
+                        <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+                            <ActivityIndicator size="large" color="#512DA8" />
+                        </View> :
+                        <ScrollView style={{flex: 1, paddingHorizontal: 16}} >
+                            {this.state.hasError ? <Text style={{ marginTop: 256 }} >{this.state.msg}</Text> :
+                                this.renderList()
+                            }
+                        </ScrollView>
+                    }
+                </View>
+            </View>
         )
     }
 }
@@ -78,6 +82,7 @@ export default class Home extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 16,
+        marginBottom: 56,
+        backgroundColor: '#F0F0F0',
     },
 })

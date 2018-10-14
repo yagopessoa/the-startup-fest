@@ -3,6 +3,7 @@ import { ScrollView, View, ActivityIndicator } from 'react-native'
 import { Actions } from 'react-native-router-flux'
 import {Divider} from 'react-native-elements'
 
+import Header from '../../Components/Header'
 import Session from './Session'
 
 import ApolloClient from "apollo-boost"
@@ -46,21 +47,36 @@ export default class LeaderBoard extends Component {
 
     render(){
 
+        const { container, divider } = styles
         const { isLoading, startups } = this.state
 
         return(
-            <View style={{flex: 1, width: '100%', alignItems: 'center', justifyContent: 'center'}} >
-                {isLoading ? <ActivityIndicator size="large" color="#512DA8" /> :
+            <View style={container} >
+                <Header title="The Startup Fest" />
+                {isLoading ? 
+                <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+                    <ActivityIndicator size="large" color="#512DA8" /> 
+                </View> :
                 <ScrollView style={{flex: 1}} >
                     <Session startups={startups} session="Proposta" />
-                    <Divider style={this.dividerStyle} />
+                    <Divider style={divider} />
                     <Session startups={startups} session="Apresentação/Pitch" />
-                    <Divider style={this.dividerStyle} />
+                    <Divider style={divider} />
                     <Session startups={startups} session="Desenvolvimento" />
                 </ScrollView>}
             </View>
         )
     }
+}
 
-    dividerStyle = {width: '100%', backgroundColor: '#bdbdbd'}
+const styles = {
+    container: {
+        flex: 1,
+        width: '100%',
+        backgroundColor: '#F0F0F0',
+    },
+    dividerStyle: {
+        width: '100%',
+        backgroundColor: '#bdbdbd'
+    },
 }

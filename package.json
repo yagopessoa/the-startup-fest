@@ -17,6 +17,7 @@
     "react-native": "0.57.1",
     "react-native-elements": "^0.19.1",
     "react-native-firebase": "^5.0.0",
+    "react-native-material-bottom-navigation-performance": "^0.7.8",
     "react-native-router-flux": "^4.0.4",
     "react-native-vector-icons": "^5.0.0"
   },
