@@ -13,6 +13,8 @@ const client = new ApolloClient({
   uri: "https://startups-project-mytvsxrgeb.now.sh"
 })
 
+import StartupList from '../../StartupList'     // TEMPORARIO
+
 export default class LeaderBoard extends Component {
     state = {
         isLoading: true,
@@ -21,7 +23,7 @@ export default class LeaderBoard extends Component {
     }
     
     componentWillMount(){
-        client.query({
+        /* client.query({
             query: gql`
               {
                 allStartups {
@@ -41,12 +43,17 @@ export default class LeaderBoard extends Component {
         .catch(e => this.setState({
             isLoading: false,
             hasError: true,
-        }))
+        })) */
+        
+        this.setState({
+            isLoading: false,
+            startups: StartupList.data.allStartups,
+        })
     }
 
     render(){
 
-        const { container, divider } = styles
+        const { container, divider, textTitle } = styles
         const { isLoading, hasError, startups } = this.state
 
         return(
@@ -66,7 +73,17 @@ export default class LeaderBoard extends Component {
                         Que pena, parece que você está com problemas de conexão...
                     </Text>
                 </View>
-                : <ScrollView style={{flex: 1}} >
+                :
+                <ScrollView style={{flex: 1}} >
+                    <View style={{alignItems: 'center', justifyContent: 'center'}}>
+                        <Image 
+                            style={{width: 96, height: 96, margin: 16}}
+                            source={require('../../img/trophy.png')}
+                        />
+                        <Text style={textTitle}>
+                            Resultados
+                        </Text>
+                    </View>
                     <Session startups={startups} session="Proposta" />
                     <Divider style={divider} />
                     <Session startups={startups} session="Apresentação/Pitch" />
@@ -87,6 +104,12 @@ const styles = {
     },
     dividerStyle: {
         width: '100%',
-        backgroundColor: '#bdbdbd'
+        backgroundColor: '#BDBDBD'
+    },
+    textTitle: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        color: '#212121',
+        marginBottom: 16,
     },
 }

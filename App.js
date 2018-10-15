@@ -58,38 +58,6 @@ export default class App extends Component {
             />
           </BottomNavigation>
         </View>
-        /*<Router>
-          <Stack key="root">
-            <Scene 
-              key="home"
-              component={Home}
-              navigationBarStyle={{backgroundColor: '#673AB7'}}
-              navBarButtonColor="#fff"
-              title="The Startup Fest"
-              onRight={() => Actions.leaderboard()}
-              renderRightButton={
-                <TouchableOpacity style={{padding: 8, marginRight: 16}} onPress={() => Actions.leaderboard()}>
-                  <Icon name="trending-up" color="#fff" />
-                </TouchableOpacity>
-              }
-            />
-            <Scene 
-              key="details"
-              component={Details}
-              navigationBarStyle={{backgroundColor: '#673AB7'}}
-              navBarButtonColor="#fff"
-              title="Avalie a Startup"
-              back
-            />
-            <Scene 
-              key="leaderboard"
-              component={LeaderBoard}
-              navigationBarStyle={{backgroundColor: '#673AB7'}}
-              navBarButtonColor="#fff"
-              title="The Startup Fest"
-            />
-          </Stack>
-        </Router>*/
     )
   }
 }

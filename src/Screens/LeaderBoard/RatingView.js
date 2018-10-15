@@ -10,11 +10,11 @@ export default RatingView = ({ score }) => {
 
     return(
         <View style={styles.container} >
-            {(grade>0) ? <Icon name="star" size={20} /> : <Icon name="star-border" size={20} />}
-            {(grade>1) ? <Icon name="star" size={20} /> : <Icon name="star-border" size={20} />}
-            {(grade>2) ? <Icon name="star" size={20} /> : <Icon name="star-border" size={20} />}
-            {(grade>3) ? <Icon name="star" size={20} /> : <Icon name="star-border" size={20} />}
-            {(grade>4) ? <Icon name="star" size={20} /> : <Icon name="star-border" size={20} />}
+            <Icon name={(grade>0) ? "star" : "star-border"} color="#FBC02D" size={20} />
+            <Icon name={(grade>1) ? "star" : "star-border"} color="#FBC02D" size={20} />
+            <Icon name={(grade>2) ? "star" : "star-border"} color="#FBC02D" size={20} />
+            <Icon name={(grade>3) ? "star" : "star-border"} color="#FBC02D" size={20} />
+            <Icon name={(grade>4) ? "star" : "star-border"} color="#FBC02D" size={20} />
         </View>
     )
 }
