@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { ScrollView, View, ActivityIndicator } from 'react-native'
+import { ScrollView, View, ActivityIndicator, Text, Image } from 'react-native'
 import { Actions } from 'react-native-router-flux'
 import {Divider} from 'react-native-elements'
 
@@ -17,6 +17,7 @@ export default class LeaderBoard extends Component {
     state = {
         isLoading: true,
         startups: [],
+        hasError: false,
     }
     
     componentWillMount(){
@@ -38,17 +39,15 @@ export default class LeaderBoard extends Component {
             startups: result.data.allStartups,
         }))
         .catch(e => this.setState({
-            msg: String(e),
             isLoading: false,
             hasError: true,
-            // TODO: show no connection icon
         }))
     }
 
     render(){
 
         const { container, divider } = styles
-        const { isLoading, startups } = this.state
+        const { isLoading, hasError, startups } = this.state
 
         return(
             <View style={container} >
@@ -57,7 +56,17 @@ export default class LeaderBoard extends Component {
                 <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
                     <ActivityIndicator size="large" color="#512DA8" /> 
                 </View> :
-                <ScrollView style={{flex: 1}} >
+                hasError ?
+                <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+                    <Image 
+                        style={{width: 100, height: 100, margin: 16}}
+                        source={require('../../img/cloud.png')}
+                    />
+                    <Text style={{ textAlign: 'center', maxWidth: 200 }}>
+                        Que pena, parece que você está com problemas de conexão...
+                    </Text>
+                </View>
+                : <ScrollView style={{flex: 1}} >
                     <Session startups={startups} session="Proposta" />
                     <Divider style={divider} />
                     <Session startups={startups} session="Apresentação/Pitch" />

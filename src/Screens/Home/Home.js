@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {StyleSheet, Text, View, ScrollView, ActivityIndicator} from 'react-native'
+import {StyleSheet, Text, View, ScrollView, ActivityIndicator, Image} from 'react-native'
 import {Router, Stack, Scene} from 'react-native-router-flux'
 
 import Header from '../../Components/Header'
@@ -49,7 +49,6 @@ class Voting extends Component {
             msg: String(e),
             isLoading: false,
             hasError: true,
-            // TODO: show no connection icon
         }))
     }
 
@@ -58,7 +57,6 @@ class Voting extends Component {
             <StartupCard
                 key={startup.name}
                 info={startup}
-                openDetails={this.openDetails}
             />
         )
     }
@@ -72,11 +70,24 @@ class Voting extends Component {
                         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
                             <ActivityIndicator size="large" color="#512DA8" />
                         </View> :
-                        <ScrollView style={styles.scrollContainer} >
-                            {this.state.hasError ? <Text style={{ marginTop: 256 }} >{this.state.msg}</Text> :
-                                this.renderList()
-                            }
-                        </ScrollView>
+                        this.state.hasError ? 
+                            <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+                                {/* <Text>{this.state.msg}</Text> */}
+                                <Image 
+                                    style={{width: 100, height: 100, margin: 16}}
+                                    source={require('../../img/cloud.png')}
+                                />
+                                <Text style={{ textAlign: 'center', maxWidth: 200 }}>
+                                    Que pena, parece que você está com problemas de conexão...
+                                </Text>
+                            </View>
+                            :
+                            <View style={{flex: 1}} >
+                                <Text style={{textAlign: 'center', paddingBottom: 16}}>Escolha uma Startup para votar:</Text>
+                                <ScrollView style={styles.scrollContainer} >
+                                    {this.renderList()}
+                                </ScrollView>
+                            </View>
                     }
                 </View>
             </View>
