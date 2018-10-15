@@ -67,12 +67,12 @@ class Voting extends Component {
         return(
             <View style={styles.container}>
                 <Header title="The Startup Fest" />
-                <View style={{flex: 1}} > 
+                <View style={{flex: 1, padding: 16}} > 
                     {this.state.isLoading ? 
                         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
                             <ActivityIndicator size="large" color="#512DA8" />
                         </View> :
-                        <ScrollView style={{flex: 1, paddingHorizontal: 16}} >
+                        <ScrollView style={styles.scrollContainer} >
                             {this.state.hasError ? <Text style={{ marginTop: 256 }} >{this.state.msg}</Text> :
                                 this.renderList()
                             }
@@ -107,6 +107,13 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         marginBottom: 56,
-        backgroundColor: '#F0F0F0',
+        backgroundColor: '#E8EAF6',
+    },
+    scrollContainer: {
+        flex: 1,
+        shadowColor: '#000',
+        shadowOffset: {width: 0, height: 2},
+        shadowOpacity: 0.2,
+        elevation: 2,
     },
 })

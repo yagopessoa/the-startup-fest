@@ -55,7 +55,7 @@ export default class Details extends Component {
                         console.log("Dados salvos com sucesso!")
 
                         Alert.alert(
-                            'Sucesso',
+                            'Parabéns!',
                             'Votos enviados com sucesso!',
                             [
                                 {text: 'OK', onPress: () => {
@@ -97,7 +97,7 @@ export default class Details extends Component {
                         console.log("Dados salvos com sucesso!")
                         
                         Alert.alert(
-                            'Sucesso',
+                            'Parabéns!',
                             'Votos enviados com sucesso!',
                             [
                                 {text: 'OK', onPress: () => {
@@ -131,58 +131,60 @@ export default class Details extends Component {
     render() {
 
         const { title, segment, description, imageUrl } = this.props
-        const { container, imgContainer, textContainer, textTitle, textSeg, textDescript, ratingContainer, dividerStyle } = styles
+        const { container, scrollContainer, internalContainer, imgContainer, textContainer, textTitle, textSeg, textDescript, ratingContainer, dividerStyle } = styles
         const { isLoading, newProposta, newApresent, newDesenvolv, disabled } = this.state
 
         if(this.state.hasError) return <Text>{this.state.msg}</Text>
 
         return (
-            <ScrollView style={{flex: 1}} >
-                <View style={container} >
-                    <View style={imgContainer}>
-                        <Image 
-                            style={{width: 300, height: 300}}
-                            defaultSource={require('../../img/loading.png')}
-                            source={{uri: imageUrl}}
-                        />
-                    </View>
-                    <Text style={textTitle}>{title}</Text>
-                    
-                    <Text style={textSeg}>{segment}</Text>
-                    <Text style={textDescript}>{description}</Text>
-                    
-                    <View style={ratingContainer}>
-                        <Text style={textTitle}>
-                            Proposta
-                        </Text>
-                        <Rating action={this.proposta.bind(this)} />
+            <View style={container} >
+                <ScrollView style={scrollContainer} >
+                    <View style={internalContainer} >
+                        <View style={imgContainer}>
+                            <Image 
+                                style={{width: 300, height: 300}}
+                                defaultSource={require('../../img/loading.png')}
+                                source={{uri: imageUrl}}
+                            />
+                        </View>
+                        <Text style={textTitle}>{title}</Text>
                         
+                        <Text style={textSeg}>{segment}</Text>
+                        <Text style={textDescript}>{description}</Text>
+                        
+                        <View style={ratingContainer}>
+                            <Text style={textTitle}>
+                                Proposta
+                            </Text>
+                            <Rating action={this.proposta.bind(this)} />
+                            
+                        </View>
+                        <Divider style={dividerStyle} />
+                        <View style={ratingContainer}>
+                            <Text style={textTitle}>
+                                Apresentação/Pitch
+                            </Text>
+                            <Rating action={this.apresent.bind(this)} />
+                        </View>
+                        <Divider style={dividerStyle} />
+                        <View style={ratingContainer}>
+                            <Text style={textTitle}>
+                                Desenvolvimento
+                            </Text>
+                            <Rating action={this.desenvolv.bind(this)} />
+                        </View>
+                        
+                        <View style={{width: '100%'}}>
+                            <Button 
+                                disabled={(newApresent<1)||(newDesenvolv<1)||(newProposta<1)||disabled}
+                                onPress={this.handleSendGrades.bind(this)}
+                                buttonTitle="ENVIAR AVALIAÇÃO"
+                                iconTitle="send"
+                            />
+                        </View>
                     </View>
-                    <Divider style={dividerStyle} />
-                    <View style={ratingContainer}>
-                        <Text style={textTitle}>
-                            Apresentação/Pitch
-                        </Text>
-                        <Rating action={this.apresent.bind(this)} />
-                    </View>
-                    <Divider style={dividerStyle} />
-                    <View style={ratingContainer}>
-                        <Text style={textTitle}>
-                            Desenvolvimento
-                        </Text>
-                        <Rating action={this.desenvolv.bind(this)} />
-                    </View>
-                    
-                    <View style={{width: '100%'}}>
-                        <Button 
-                            disabled={(newApresent<1)||(newDesenvolv<1)||(newProposta<1)||disabled}
-                            onPress={this.handleSendGrades.bind(this)}
-                            buttonTitle="ENVIAR AVALIAÇÃO"
-                            iconTitle="send"
-                        />
-                    </View>
-                </View>
-            </ScrollView>
+                </ScrollView>
+            </View>
         )
     }
 }
@@ -191,6 +193,15 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 16,
+        marginBottom: 56,
+        alignItems: 'center',
+        backgroundColor: '#E8EAF6',
+    },
+    scrollContainer: {
+        flex: 1,
+    },
+    internalContainer: {
+        flex: 1,
         alignItems: 'center',
     },
     imgContainer: {

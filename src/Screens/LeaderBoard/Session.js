@@ -75,14 +75,14 @@ export default class Session extends Component {
         
         return(
             <View style={container} >
+                <Text style={textTitle} >
+                    {session}
+                </Text>
                 {this.state.isLoading ? 
                 <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
                     <ActivityIndicator size="large" color="#512DA8" />
                 </View> : 
                 <View>
-                    <Text style={textTitle} >
-                        {session}
-                    </Text>
                     <Position name={startups[0].name} segment={startups[0].segment} imgUrl={startups[0].imageUrl} position="1º" score={String(grades[0].toFixed(1))+"/5"} />
                     <Position name={startups[1].name} segment={startups[1].segment} imgUrl={startups[1].imageUrl} position="2º" score={String(grades[1].toFixed(1))+"/5"} />
                     <Position name={startups[2].name} segment={startups[2].segment} imgUrl={startups[2].imageUrl} position="3º" score={String(grades[2].toFixed(1))+"/5"} />

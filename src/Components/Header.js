@@ -13,7 +13,7 @@ const Header = ({title}) => {
 
 const styles = {
     container: {
-        backgroundColor: '#512DA8',
+        backgroundColor: '#673AB7',
         justifyContent: 'flex-start', 
         flexDirection: 'row',
         alignItems: 'center',
@@ -28,6 +28,7 @@ const styles = {
         fontSize: 20,
         color: '#fff',
         paddingLeft: 32,
+        fontWeight: 'bold',
     },
 }
 

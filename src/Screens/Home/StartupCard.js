@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {Text, View, TouchableOpacity, Image} from 'react-native'
 import { Actions } from 'react-native-router-flux'
+import { Divider } from 'react-native-elements'
 
 export default class StartupCard extends Component {
     state = {
@@ -53,18 +54,19 @@ export default class StartupCard extends Component {
         return(
             <View style={container}>
                 <TouchableOpacity onPress={this.onPress} >
-                    <View style={imgContainer}>
+                    <View style={{flexDirection: 'row', alignContent: 'flex-start', width: '100%'}}>
                         {(imageUrl!=='') && <Image 
-                            style={{width: 250, height: 250}}
+                            style={{width: 100, height: 100, margin: 16}}
                             defaultSource={require('../../img/loading.png')}
                             source={{uri: imageUrl}}
                         />}
-                    </View>
-                    <View style={textContainer}>
-                        <Text style={textTitle}>{name}</Text>
-                        <Text style={textSeg}>{segment.name}</Text>
+                        <View style={textContainer}>
+                            <Text style={textTitle}>{name}</Text>
+                            <Text style={textSeg}>{segment.name}</Text>
+                        </View>
                     </View>
                 </TouchableOpacity>
+                <Divider style={{width: '100%', backgroundColor: '#BDBDBD'}} />
             </View>
         )
     }
@@ -73,27 +75,24 @@ export default class StartupCard extends Component {
 const styles = {
     container: {
         backgroundColor: '#fff',
-        width: '100%' - 32,
-        borderRadius: 5,
-        padding: 16,
-        margin: 16,
-        alignItems: 'center',
+        width: '100%',
+        alignItems: 'flex-start',
         justifyContent: 'center',
         shadowColor: '#000',
         shadowOffset: {width: 0, height: 2},
         shadowOpacity: 0.2,
-        shadowRadius: 5,
         elevation: 2,
     },
     imgContainer: {
-        width: 250,
-        height: 250,
+        width: 100,
+        height: 100,
         backgroundColor: '#bbb',
         margin: 16,
     },
     textContainer: {
-        alignItems: 'center',
-        padding: 16,
+        flex: 1,
+        alignItems: 'flex-start',
+        justifyContent: 'center',
     },
     textTitle: {
         marginBottom: 8,

@@ -73,7 +73,8 @@ const styles = {
     container: {
         flex: 1,
         width: '100%',
-        backgroundColor: '#F0F0F0',
+        marginBottom: 56,
+        backgroundColor: '#E8EAF6',
     },
     dividerStyle: {
         width: '100%',

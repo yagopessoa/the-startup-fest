@@ -31,7 +31,17 @@ export default class App extends Component {
             labelColor="#BDBDBD"
             rippleColor="#BDBDBD"
             activeLabelColor="#673AB7"
-            style={{ height: 56, elevation: 8, position: 'absolute', left: 0, bottom: 0, right: 0 }}
+            style={{
+              height: 56,
+              elevation: 8, 
+              shadowColor: '#000',
+              shadowOffset: {width: 0, height: 4},
+              shadowOpacity: 0.7,
+              position: 'absolute', 
+              left: 0, 
+              bottom: 0, 
+              right: 0 
+            }}
             onTabChange={(newTabIndex) => {
               this.setState({ sceneNumber: newTabIndex })
             }}
