@@ -131,7 +131,7 @@ export default class Details extends Component {
     render() {
 
         const { title, segment, description, imageUrl } = this.props
-        const { container, scrollContainer, internalContainer, imgContainer, textContainer, textTitle, textSeg, textDescript, ratingContainer, dividerStyle } = styles
+        const { container, scrollContainer, internalContainer, imgContainer, textContainer, textTitle, textSeg, textDescript, ratingContainer, dividerStyle, textLabel } = styles
         const { isLoading, newProposta, newApresent, newDesenvolv, disabled } = this.state
 
         if(this.state.hasError) return <Text>{this.state.msg}</Text>
@@ -157,21 +157,43 @@ export default class Details extends Component {
                                 Proposta
                             </Text>
                             <Rating action={this.proposta.bind(this)} />
-                            
+                            {newProposta>0 && <Text style={textLabel}>{
+                                newProposta===1 ? "Péssimo" :
+                                newProposta===2 ? "Ruim" :
+                                newProposta===3 ? "Regular" :
+                                newProposta===4 ? "Bom" :
+                                "Excelente"
+                            }</Text>}
                         </View>
+
                         <Divider style={dividerStyle} />
                         <View style={ratingContainer}>
                             <Text style={textTitle}>
                                 Apresentação/Pitch
                             </Text>
                             <Rating action={this.apresent.bind(this)} />
+                            {newApresent>0 && <Text style={textLabel}>{
+                                newApresent===1 ? "Péssimo" :
+                                newApresent===2 ? "Ruim" :
+                                newApresent===3 ? "Regular" :
+                                newApresent===4 ? "Bom" :
+                                "Excelente"
+                            }</Text>}
                         </View>
+
                         <Divider style={dividerStyle} />
                         <View style={ratingContainer}>
                             <Text style={textTitle}>
                                 Desenvolvimento
                             </Text>
                             <Rating action={this.desenvolv.bind(this)} />
+                            {newDesenvolv>0 && <Text style={textLabel}>{
+                                newDesenvolv===1 ? "Péssimo" :
+                                newDesenvolv===2 ? "Ruim" :
+                                newDesenvolv===3 ? "Regular" :
+                                newDesenvolv===4 ? "Bom" :
+                                "Excelente"
+                            }</Text>}
                         </View>
                         
                         <View style={{width: '100%'}}>
@@ -239,4 +261,8 @@ const styles = StyleSheet.create({
         width: '90%',
         backgroundColor: '#bdbdbd'
     },
+    textLabel: {
+        fontSize: 18,
+        color: '#212121',
+    }
 })

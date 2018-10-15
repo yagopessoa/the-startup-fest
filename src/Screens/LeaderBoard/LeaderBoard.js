@@ -13,7 +13,7 @@ const client = new ApolloClient({
   uri: "https://startups-project-mytvsxrgeb.now.sh"
 })
 
-import StartupList from '../../StartupList'     // TEMPORARIO
+//import StartupList from '../../StartupList'     // TEMPORARIO
 
 export default class LeaderBoard extends Component {
     state = {
@@ -23,7 +23,7 @@ export default class LeaderBoard extends Component {
     }
     
     componentWillMount(){
-        /* client.query({
+        client.query({
             query: gql`
               {
                 allStartups {
@@ -43,12 +43,12 @@ export default class LeaderBoard extends Component {
         .catch(e => this.setState({
             isLoading: false,
             hasError: true,
-        })) */
+        }))
         
-        this.setState({
+        /* this.setState({
             isLoading: false,
             startups: StartupList.data.allStartups,
-        })
+        }) */
     }
 
     render(){
