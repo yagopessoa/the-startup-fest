@@ -22,7 +22,6 @@ class Voting extends Component {
         isLoading: true,
         hasError: false,
         details: false,
-        info: null,
     }
     
     componentDidMount(){

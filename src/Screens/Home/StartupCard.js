@@ -18,23 +18,21 @@ export default class StartupCard extends Component {
 
     onPress = () => {
         
-        const { name, description, segment, imageUrl } = this.state
-        const title = name
-        const segmen = segment.name
-
-        //this.props.openDetails(title, description, segmen, imageUrl)
+        const { name, description, segment, imageUrl, teamCount, annualReceipt } = this.state
 
         Actions.details({ 
             title: name,
             description: description,
             segment: segment.name,
             imageUrl: imageUrl,
+            teamCount: teamCount,
+            annualReceipt: annualReceipt
         })
     }
 
     componentDidMount(){
         try{
-            const { name, description, Segment, imageUrl } = this.props.info
+            const { name, description, Segment, imageUrl, teamCount, annualReceipt } = this.props.info
 
             this.setState({
                 name: name,
@@ -43,6 +41,8 @@ export default class StartupCard extends Component {
                     name: Segment.name
                 },
                 imageUrl: imageUrl,
+                teamCount: teamCount,
+                annualReceipt: annualReceipt
             })
         } catch(e) { this.setState({ name: String(e) }) }
     }
@@ -56,7 +56,7 @@ export default class StartupCard extends Component {
                 <TouchableOpacity onPress={this.onPress} >
                     <View style={{flexDirection: 'row', alignContent: 'flex-start', width: '100%'}}>
                         {(imageUrl!=='') && <Image 
-                            style={{width: 100, height: 100, margin: 16}}
+                            style={{width: 80, height: 80, margin: 16}}
                             defaultSource={require('../../img/loading.png')}
                             source={{uri: imageUrl}}
                         />}
