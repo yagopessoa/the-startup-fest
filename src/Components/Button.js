@@ -3,21 +3,21 @@ import { Icon } from 'react-native-elements'
 import { Text, TouchableOpacity, View } from 'react-native'
 
 
-const Button = ({ buttonTitle, iconTitle, onPress }) => {
+const Button = ({ buttonTitle, iconTitle, onPress, disabled }) => {
 
     let hasIcon = false
     if(iconTitle) hasIcon = true
 
-    const {textStyle, buttonStyle, buttonContainerStyle} = styles
+    const {textStyle, textDisabledStyle, buttonStyle, buttonDisabledStyle, buttonContainerStyle} = styles
 
     return (
         <View style={buttonContainerStyle}>
-            <TouchableOpacity onPress={onPress} style={buttonStyle}>
+            <TouchableOpacity disabled={disabled} onPress={onPress} style={disabled ? buttonDisabledStyle : buttonStyle}>
                 <View style={{flexDirection: 'row'}}>
                     {hasIcon && <View style={{marginRight: 16}}>
-                        <Icon name={iconTitle} color='#fff'/>
+                        <Icon name={iconTitle} color={disabled ? '#212121' : '#fff'}/>
                     </View>}
-                    <Text style={textStyle}>{buttonTitle}</Text>
+                    <Text style={disabled ? textDisabledStyle : textStyle}>{buttonTitle}</Text>
                 </View>
             </TouchableOpacity>
         </View>
@@ -25,13 +25,18 @@ const Button = ({ buttonTitle, iconTitle, onPress }) => {
 }
 
 const styles = {
-    buttonContainerStyle:{
+    buttonContainerStyle: {
         height: 88,
         justifyContent: 'flex-end',
         alignItems:'stretch',
-      },
+    },
     textStyle: {
         color: '#fff',
+        fontSize: 16,
+        fontWeight: '600',
+    },
+    textDisabledStyle: {
+        color: '#212121',
         fontSize: 16,
         fontWeight: '600',
     },
@@ -48,6 +53,15 @@ const styles = {
         shadowOpacity: 0.2,
         shadowRadius: 5,
         elevation: 2,
+    },
+    buttonDisabledStyle:{
+        height: 56,
+        backgroundColor: '#BDBDBD',
+        borderRadius: 5,
+        padding: 16,
+        margin: 16,
+        alignItems: 'center',
+        justifyContent: 'center',
     }
 }
 

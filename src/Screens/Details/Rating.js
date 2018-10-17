@@ -5,13 +5,13 @@ import { Icon } from 'react-native-elements'
 export default class Rating extends Component {
 
     state = {
-        grade: 3
+        grade: 0
     }
     
     renderStar(){
         return(
             <View style={styles.starContainer}>
-                <Icon name="star" color="#212121" size={40} />
+                <Icon name="star" color="#FBC02D" size={40} />
             </View>
         )
     }
@@ -42,7 +42,9 @@ export default class Rating extends Component {
         return(
             <View style={container} >
                 <TouchableOpacity onPress={() => { this.setState({ grade: 1 }, this.handleGrade) }} >
-                    {this.renderStar()}
+                    { (grade >= 1) ?
+                        this.renderStar() :
+                        this.renderStarBorder() }
                 </TouchableOpacity>
 
                 <TouchableOpacity onPress={() => { this.setState({ grade: 2 }, this.handleGrade) }} >

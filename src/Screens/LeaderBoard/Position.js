@@ -10,7 +10,7 @@ export default Position = ({ name, segment, imgUrl, position, score }) => {
         <View style={container} >
             <Text style={textTitle} >{position}</Text>
             {(imgUrl!=='') && <Image 
-                style={{width: 100, height: 100, margin: 8}}
+                style={{width: 80, height: 80, margin: 16}}
                 defaultSource={require('../../img/loading.png')}
                 source={{uri: imgUrl}}
             />}
@@ -31,17 +31,10 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         backgroundColor: '#fff',
         width: '100%',
-        borderRadius: 5,
-        padding: 16,
+        padding: 8,
         marginHorizontal: 16,
-        marginVertical: 4,
         alignItems: 'center',
         justifyContent: 'flex-start',
-        shadowColor: '#000',
-        shadowOffset: {width: 0, height: 2},
-        shadowOpacity: 0.2,
-        shadowRadius: 5,
-        elevation: 2,
     },
     textContainer: {
         alignItems: 'flex-start',
