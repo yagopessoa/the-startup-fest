@@ -13,8 +13,6 @@ const client = new ApolloClient({
   uri: "https://startups-project-mytvsxrgeb.now.sh"
 })
 
-//import StartupList from '../../StartupList'     // TEMPORARIO
-
 class Voting extends Component {
     state = {
         msg: 'Loading...',
@@ -51,11 +49,6 @@ class Voting extends Component {
             isLoading: false,
             hasError: true,
         }))
-
-        /* this.setState({
-            isLoading: false,
-            itens: StartupList.data.allStartups,
-        }) */
     }
 
     renderList(){
@@ -89,14 +82,13 @@ class Voting extends Component {
                             </View>
                             :
                             <View style={{flex: 1}} >
-                                {/* <Text style={{textAlign: 'center', paddingBottom: 16}}>Escolha uma Startup para votar:</Text> */}
                                 <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
                                     <Image 
                                         style={{width: 48, height: 48, marginRight: 16, marginBottom: 16}}
                                         source={require('../../img/voting.png')}
                                     />
                                     <Text style={{ fontSize: 16 }}>
-                                        Escolha uma Startup para votar:
+                                        Escolha uma Startup para avaliar:
                                     </Text>
                                 </View>
                                 <ScrollView style={styles.scrollContainer} >

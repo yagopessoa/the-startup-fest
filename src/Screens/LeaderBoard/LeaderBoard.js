@@ -13,8 +13,6 @@ const client = new ApolloClient({
   uri: "https://startups-project-mytvsxrgeb.now.sh"
 })
 
-//import StartupList from '../../StartupList'     // TEMPORARIO
-
 export default class LeaderBoard extends Component {
     state = {
         isLoading: true,
@@ -44,11 +42,6 @@ export default class LeaderBoard extends Component {
             isLoading: false,
             hasError: true,
         }))
-        
-        /* this.setState({
-            isLoading: false,
-            startups: StartupList.data.allStartups,
-        }) */
     }
 
     render(){

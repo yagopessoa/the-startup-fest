@@ -47,7 +47,7 @@ export default class App extends Component {
             }}
           >
             <Tab
-              label="Votação"
+              label="Avaliação"
               icon={<Icon size={24} color="#BDBDBD" name="stars" />}
               activeIcon={<Icon size={24} color="#673AB7" name="stars" />}
             />
