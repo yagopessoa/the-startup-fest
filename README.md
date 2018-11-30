@@ -2,7 +2,13 @@
 
 ## About
 A Startup event management app to give users the chance to rate the participating Startups, and a leaderboard to show the results in realtime.
-It was built using React Native and the rating are saved on Firebase.
+It was built using React Native and the votes are stored on Firebase.
+
+## Screenshots
+
+<img src="https://raw.githubusercontent.com/yagopessoa/the-startup-fest/master/src/img/ss1.jpg" height=400>    <img src="https://raw.githubusercontent.com/yagopessoa/the-startup-fest/master/src/img/ss2.jpg" height=400>
+
+<img src="https://raw.githubusercontent.com/yagopessoa/the-startup-fest/master/src/img/ss3.jpg" height=400>    <img src="https://raw.githubusercontent.com/yagopessoa/the-startup-fest/master/src/img/ss4.jpg" height=400>
 
 ## Credits
 ### Icons and images:
